@@ -1,0 +1,73 @@
+:root {
+  font-family: "Work Sans", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  overflow-x: hidden;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* colors */
+  --primary-color:#213F7D;
+  --bluish-gray:#545F7D;
+  --hover-grey:rgb(138, 138, 138);
+  --input-border: #e7e8ea;
+ --input-border-2:#545f7d20;
+  --light-teal:#39CDCC;
+  --transparent-teal:#39cdcd52;
+  --transparent-teal-2:#39cdcd1e ;
+  --white: white;
+  --background: #FBFBFB;
+
+
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+
+
+}
+
+@font-face {
+  font-family: 'Avenir-B';
+  src: url('./assets/fonts/avenir/AvenirNextLTPro-Bold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir-R';
+  src: url('./assets/fonts/avenir/AvenirNextLTPro-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir-M';
+  src: url('./assets/fonts/avenir/AvenirLTStd-Medium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  
+  button {
+    background-color: #f9f9f9;
+  }
+}

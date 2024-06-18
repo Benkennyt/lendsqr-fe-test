@@ -1,0 +1,216 @@
+.login-pg-cont {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login-pg-svg-form {
+    display: flex;
+    padding: 20px;
+    width: 100%;
+
+
+    .login-leftsvg {
+      width: 100%;
+      display: grid;
+      place-items: center;
+
+      .login-pg-lg {
+        width: 600px;
+        margin-bottom: 150px;
+      }
+    }
+
+    .login-form-cont {
+      width: 100%;
+      margin-top: 80px;
+
+      h1 {
+        font-size: 2.5em;
+        font-family: Avenir-B;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+
+      }
+
+      p {
+        font-size: 1.25em;
+        font-family: Avenir-R;
+        margin: 0px;
+        color: var(--text-color);
+        margin-bottom: 30px;
+
+      }
+
+      form {
+        display: grid;
+
+        .input-container {
+          height: 50px;
+          position: relative;
+          display: flex;
+          width: 100%;
+          max-width: 447px;
+          border: 2px solid var(--input-border);
+          border-radius: 5px;
+
+          &.ic2 {
+            margin-top: 30px;
+          }
+
+          .input {
+            background-color: transparent;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: .9em;
+            font-family: Avenir-R;
+            height: 100%;
+            outline: 0;
+            padding: 4px 20px 0;
+            width: 100%;
+
+            &:focus~.placeholder,
+            &:not(:placeholder-shown)~.placeholder {
+              transform: translateY(-30px) translateX(10px) scale(0.75);
+            }
+
+            &:not(:placeholder-shown)~.placeholder {
+              color: var(--light-teal);
+              background-color: white;
+              opacity: 1;
+              margin-top: 3px;
+            }
+
+            &:focus~.placeholder {
+              color: var(--light-teal);
+              background-color: white;
+              opacity: 1;
+              margin-top: 3px;
+            }
+          }
+
+          .placeholder {
+            color: var(--placeholder);
+            opacity: 60%;
+            font-family: Avenir-R;
+            font-size: .9em;
+            left: 20px;
+            line-height: 14px;
+            pointer-events: none;
+            position: absolute;
+            transform-origin: 0 50%;
+            transition: transform 200ms, color 200ms;
+            top: 20px;
+          }
+
+
+
+          .password-hide-show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 20px 5px 5px;
+            color: var(--light-teal);
+            font-size: .75em;
+            font-family: Avenir-M;
+            letter-spacing: 1px;
+            cursor: pointer;
+
+          }
+        }
+
+        a {
+          text-decoration: none;
+          color: var(--light-teal);
+          cursor: pointer;
+          font-family: Avenir-M;
+          font-weight: 400 !important;
+          font-size: .75em;
+          letter-spacing: 2px;
+          margin-top: 25px;
+          transition: all .2s ease;
+          width: fit-content;
+
+          &:hover {
+            text-decoration: underline;
+            text-decoration-color: var(--light-teal) !important;
+            text-underline-offset: 2px;
+          }
+        }
+
+        button {
+          width: 100%;
+          max-width: 447px;
+          height: 48px;
+          border: none;
+          border-radius: 8px;
+          background: var(--light-teal);
+          color: var(--white);
+          font-size: .9em;
+          font-family: Avenir-M;
+          margin-top: 30px;
+          cursor: pointer;
+          transition: all .2s ease;
+
+          &:hover {
+            filter: brightness(.9);
+            transform: translateY(-5%);
+
+          }
+        }
+
+      }
+    }
+
+  }
+}
+
+
+@media screen and (max-width: 908px) {
+
+  .login-pg-cont {
+    height: 100vh;
+    width: 100vw;
+    display: block !important;
+    justify-content: unset !important;
+    align-items: unset !important;
+
+    .login-pg-svg-form {
+      display: block;
+      padding: 30px 45px;
+
+
+      .login-leftsvg svg:nth-child(2) {
+        display: none;
+      }
+
+      .login-pg-lg {
+        width: 100% !important;
+        margin: 0px !important;
+      }
+
+
+      .login-form-cont {
+        margin-top: clamp(30px, 20vh, 210px);
+
+        h1 {
+          margin-top: 0px;
+        }
+
+        form {
+          .input-container {
+            max-width: unset;
+          }
+
+          button {
+            max-width: unset;
+          }
+        }
+      }
+    }
+  }
+
+
+}
