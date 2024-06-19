@@ -1,0 +1,102 @@
+.content-display {
+    padding: 50px 60px;
+    width: calc(100vw - 295px);
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: auto;
+    .users-content{
+        height: fit-content;
+        width: 100%;
+
+        h1 {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .users-stats {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+
+            .stat {
+                min-width: 240px;
+                height:160px ;
+                padding: 20px 30px;
+                
+                box-sizing: border-box;
+                background-color: var(--white);
+                border-radius: 5px;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                color: var(--primary-color);
+                transition: all 0.3s ease;
+                cursor: pointer;
+
+                &:hover{
+                    transform: scale(1.05);
+                    background-color: var(--transparent-color);
+                    
+
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+                }
+
+                .stat-name {
+                    font-size: .9em;
+                    font-weight: 500;
+                    margin-bottom: 0px;
+                    margin-top: 0px;
+
+                }
+
+                .stat-total{
+                    font-size: 24px;
+                    font-weight: 600;
+                    margin-top: 0px;
+                }
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1435px) {
+
+    .content-display {
+    .users-content {
+        .users-stats { 
+            grid-template-columns: repeat(2, minmax(240px, 1fr));
+        }
+    }}
+}
+
+
+@media screen and (max-width: 929px) {
+    .content-display {
+        .users-content {
+            .users-stats { 
+                grid-template-columns: repeat(1, minmax(240px, 1fr));
+            }
+        }}
+}
+
+
+@media screen and (max-width: 860px) {
+    .content-display {
+        width: calc(100vw) !important;
+    }
+}
+
+
+@media screen and (max-width: 624px) {
+    // .users-content {
+    //     .users-stats {
+           
+    //         grid-template-columns: repeat(autofill, minmax(240px, 1fr)) !important;
+    //     }
+    // }
+}
+

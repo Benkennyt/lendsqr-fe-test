@@ -3,6 +3,8 @@
     background: var(--background);
     display: grid;
 
+    
+
     .search-bar {
         width: 400px;
         height: 40px;
@@ -57,6 +59,7 @@
         box-sizing: border-box;
         background: var(--white);
         color: var(--primary-color);
+        z-index: 1000;
 
 
         .logo {
@@ -69,7 +72,8 @@
                 width: 144.8px;
                 height: 30px;
             }
-            svg:nth-child(2) {
+
+            button {
                 display: none;
             }
 
@@ -82,7 +86,8 @@
             align-items: center;
             width: 300px;
             margin-left: 30px;
-            gap: 20px;
+            gap: 10px;
+            margin-right: 5px;
 
             .docs {
                 a {
@@ -102,16 +107,24 @@
 
 
             .notification-icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 margin-left: 25px;
+                min-width: 40px;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                transition: all .2s ease-out;
 
                 svg {
                     cursor: pointer;
 
                 }
 
-                &:hover path {
-                    stroke: var(--light-teal) !important;
-                    fill: var(--light-teal) !important;
+                &:hover {
+                    background-color: var(--transparent-teal);
+                    width: 40px;
+                    aspect-ratio: 1;
                 }
 
             }
@@ -177,7 +190,17 @@
         .mobile-nav-toggle {
             display: none;
         }
+
+        .more-icon {
+            display: none;
+        }
     }
+
+        .dashboard-bdy {
+            display: flex;
+    
+            
+        }
 
     
 }
@@ -186,74 +209,62 @@
 @media screen and (max-width: 860px) {
     .dashboard-cont {
 
-        .search-bar {
-            display: none;
-        }
-
-        .dashboard-display {
+        .active-pg-display {
             height: 100vh;
-            
-            
         }
         
         header {
+            padding-left: 5px;
+            padding-right: 10px;
+            z-index: 100;
+            .logo {
+                margin-right: 0px;
+                svg {
+                    display: none;
+                }
+
+                button {
+                    display: flex;
+                    height: 35px;
+                    width: 35px;
+                    margin-right: 10px;
+                    border: none;
+                    background-color: transparent;
+
+                    svg {
+                        display: block;
+                        color: var(--primary-color);
+                    }
+                }
+
+            }
+
+            .search-bar {
+                width: 100%;
+            }
 
             .hdn-right-side-cont {
-                width:170px !important;
+                width:100px !important;
                 margin-left: auto;
-                gap: 10px;
 
                 .docs {
-                    a {
-                       display: none;
-                    }
-    
-                    button {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 30px;
-                        height: 30px;
-                        padding: 0;
-                        border: none;
-                        background-color: transparent;
-                        cursor: pointer;
-
-                        svg {
-                            width: 25px;
-                            height: 25px;
-                            color: var(--primary-color) !important;
-                        }
-                    }
+                    display: none; 
                 }
 
                 .notification-icon {
-                    margin-left: 0px;
+                    display: none;
                 }
-    
-                .profile {
-                    justify-content: unset;
-                    z-index: 5;
-                    width: 75px;
-    
-                    
-                    &:hover::before, &:focus::before {
-                        width: 75px;
-                        height: 54px;
-                        padding: 5px;
-                        background-color: var(--transparent-teal);
-                        z-index: 4;
-                    }
 
-                    
-                    
+                .profile{
+                    margin-left: 5px;
+                    width: fit-content !important;
                     p{
                         display: none;
                     }
                 }
             }
 
-            .mobile-nav-toggle {
+            .more-icon {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -262,8 +273,6 @@
                 border: none;
                 width: 25px;
                 height: 25px;
-             
-
                 svg {
                     height: 25px;
                     width: 25px;
@@ -273,72 +282,22 @@
             }
         }
 
-
-        .dashboard-bdy {
-            .search-bar {
-                display: flex;
-                margin-top: 10px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            
-        }
-
     }
 
     
 
 }
 
-
-
-@media screen and (max-width: 571px) {
-    header {
-        padding-right: 10px !important;
-        padding-left: 10px !important;
-
-        .logo {
-            width: 40px !important;
-            svg {
-                display: none;
-            }
-            svg:nth-child(2) {
-                display: block !important;
-            }
-
+@media screen and (max-width: 668px) {
+    .profile{
+        margin-left: 20px;
+        width: fit-content !important;
+        p{
+            display: none;
         }
-        .hdn-right-side-cont {
-            width: 200px !important;
-            
-        }
-    }
-
-    .search-bar {
-        width: 60vw !important;
-        z-index: 500;
     }
 }
 
-
-// @media screen and (max-width: 457px) {
-//     header {
-//         padding-right: 15px !important;
-//         height: 70px !important;
-//         .hdn-right-side-cont {
-//             .docs {
-//                 display: none;
-//             }
-//         }
-
-//         .logo {
-            
-//             svg {
-//                 width: 130px;
-//             }
-//         }
-//     }
-// }
 
 
 

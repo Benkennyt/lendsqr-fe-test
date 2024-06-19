@@ -22,6 +22,10 @@
         background-color: var(--primary-color);
     }
 
+    .logo {
+        display: none;
+    }
+
     .switch-organization,
     .dashboard {
         font-size: 1em;
@@ -51,18 +55,20 @@
         justify-content: unset;
         margin-top: 50px;
         margin-bottom: 35px;
+        opacity: 50%;
         p {
             margin-left: 10px;
         }
     }
 
     .hds {
-
+        
         p {
             font-size: .75em;
             font-weight: 500;
             color: --bluish-gray;
             padding-left: 33px;
+            margin-bottom: 10px;
         }
 
         ul {
@@ -106,7 +112,7 @@
     .sidebar {
         position: absolute;
         padding-bottom: 20px;
-        padding-top: 120px;
+        padding-top: 200px;
         width: 100%;
         height: fit-content;
         display: grid;
@@ -114,10 +120,20 @@
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
         transform: translateY(-120%);
         transition: transform 350ms ease-in-out;
-        z-index: 1000;
-    
+        z-index:50;
+       
         &[data-visible="true"] {
-            transform: translateY(0%);
+            transform: translateY(.5%);
+        }
+
+        .logo {
+            display: flex;
+            padding-left: 33px;
+            margin-top: -10px;
+            margin-bottom: 50px;
+            svg {
+                width: 120px;
+            }
         }
         
 
@@ -125,7 +141,7 @@
             position: absolute;
             margin-top: 20px;
             .switch-organization {
-                margin-top: 0px;
+               
                 p{
                     margin-right: 10px;
                 }
@@ -150,9 +166,18 @@
 
 @media screen and (max-width: 398px) {
     .sidebar {
-        padding-top: 100px !important;
+        padding-top: 178px !important;
+        transform: translateX(-120%);
+    
+        &[data-visible="true"] {
+            transform: translateX(0%), translateY(.5%);
+
+
+        }
         .hds {
             margin-top: 20px !important;
+            
         }
+
     }
 }

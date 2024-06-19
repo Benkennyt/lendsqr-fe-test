@@ -13,12 +13,13 @@
 
   /* colors */
   --primary-color:#213F7D;
+  --transparent-color:#ced8ef5e;
   --bluish-gray:#545F7D;
   --hover-grey:rgb(138, 138, 138);
   --input-border: #e7e8ea;
  --input-border-2:#545f7d20;
   --light-teal:#39CDCC;
-  --transparent-teal:#39cdcd52;
+  --transparent-teal:#39cdcd28;
   --transparent-teal-2:#39cdcd1e ;
   --white: white;
   --background: #FBFBFB;
