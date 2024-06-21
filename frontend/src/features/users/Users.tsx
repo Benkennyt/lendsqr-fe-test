@@ -16,23 +16,34 @@ import { useAppDispatch } from '../../app/stores/stores';
 import Pagination from '../../common/Pagination';
 import useWindowResize from '../../hooks/useWindowResize';
 import UserDetails from './userDetails/UserDetails';
+import { BiFilterAlt } from 'react-icons/bi';
+import { Tooltip } from 'react-tooltip';
+import Loading from '../../common/loading/Loading';
+import Filter from '../../common/filter/Filter';
 
+interface UsersProps {
+    showFilter: boolean;
+    handleFilter: () => void;
+}
 
-const Users = () => {
-    const { data } = useSelector((state: any) => state.users);
+const Users = (props:UsersProps) => {
+    const{ showFilter, handleFilter} = props;
+    const { data , isLoading, isError} = useSelector((state: any) => state.users);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(9);
     const [data1, setData1] = useState<User[]>(data);
     const [isPanelVisible, setIsPanelVisible] = useState(false)
     const [userId, setUserId] = useState('')
     const [rowIndex, setRowIndex] = useState<null | number>(null)
-    const [showUserDetails, setShowUserDetails] = useState<null | boolean>(false)
-    const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'ascending' });
+    const [showUserDetails, setShowUserDetails] = useState<null | boolean>(false);
+    const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'descending' });
+    const [inverseSortIcon, setInverseSortIcon] = useState('');
     const dispatch = useAppDispatch()
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentPosts = data1.slice(firstPostIndex, lastPostIndex)
     const { width } = useWindowResize();
+    
 
 
     useEffect(() => {
@@ -45,7 +56,7 @@ const Users = () => {
 
 
     useEffect(() => {
-        sortData('date_joined')
+        sortData('dateJoined')
     }, [data])
 
 
@@ -64,28 +75,28 @@ const Users = () => {
     };
 
     const sortData = (key: string) => {
-        let direction = 'ascending';
+        let direction = 'descending';
 
-        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
-            direction = 'descending';
+        if (sortConfig.key === key && sortConfig.direction === 'descending') {
+            direction = 'ascending';
         }
 
         const sortedData = [...data].sort((a, b) => {
 
-            if (key === 'date_joined') {
+            if (key === 'dateJoined') {
                 const dateA = new Date(Date.parse(a[key]));
                 const dateB = new Date(Date.parse(b[key]));
-                if (direction === 'ascending') {
-                    return dateA > dateB ? 1 : -1;
+                if (direction === 'descending') {
+                    return dateA > dateB ? -1 : 1;
                 } else {
-                    return dateA < dateB ? 1 : -1;
+                    return dateA < dateB ? -1 : 1;
                 }
             } else {
                 if (a[key] < b[key]) {
-                    return direction === 'ascending' ? -1 : 1;
+                    return direction === 'descending' ? -1 : 1;
                 }
                 if (a[key] > b[key]) {
-                    return direction === 'ascending' ? 1 : -1;
+                    return direction === 'descending' ? 1 : -1;
                 }
                 return 0;
             }
@@ -95,6 +106,15 @@ const Users = () => {
         setSortConfig({ key, direction });
         setCurrentPage(1)
     };
+
+    const handleDataSorting = (key: string, name: string) => {
+        sortData(key)
+        if (inverseSortIcon === name) {
+            setInverseSortIcon('')
+        } else {
+            setInverseSortIcon(name)
+        }
+    }
 
     const handleUserManagementPanelVisibility = (id: number | null) => {
         setIsPanelVisible(true)
@@ -121,37 +141,37 @@ const Users = () => {
             <thead>
                 <tr>
                     <th>
-                        <button onClick={() => sortData('organization')}>
+                        <button className={inverseSortIcon === 'org1' ? inverseSortIcon : ''} onClick={() => handleDataSorting('organization', 'org1')}>
                             <p>Organization</p>
                             <FilterResultIcon />
                         </button>
                     </th>
                     <th>
-                        <button onClick={() => sortData('username')}>
+                        <button className={inverseSortIcon === 'ursn1' ? inverseSortIcon : ''} onClick={() => handleDataSorting('username', 'ursn1')}>
                             <p>Username</p>
                             <FilterResultIcon />
                         </button>
                     </th>
                     <th>
-                        <button onClick={() => sortData('email')}>
+                        <button className={inverseSortIcon === 'mail' ? inverseSortIcon : ''} onClick={() => handleDataSorting('email', 'mail')}>
                             <p>Email</p>
                             <FilterResultIcon />
                         </button>
                     </th>
                     <th>
-                        <button onClick={() => sortData('phoneNumber')}>
+                        <button className={inverseSortIcon === 'num' ? inverseSortIcon : ''} onClick={() => handleDataSorting('phoneNumber', 'num')}>
                             <p>Phone Number</p>
                             <FilterResultIcon />
                         </button>
                     </th>
                     <th>
-                        <button onClick={() => sortData('date_joined')}>
+                        <button className={inverseSortIcon === 'date' ? inverseSortIcon : ''} onClick={() => handleDataSorting('dateJoined', 'date')}>
                             Date Joined
                             <FilterResultIcon />
                         </button>
                     </th>
                     <th>
-                        <button onClick={() => sortData('status')}>
+                        <button className={inverseSortIcon === 'stts' ? inverseSortIcon : ''} onClick={() => handleDataSorting('status', 'stts')}>
                             <p>Status</p>
                             <FilterResultIcon />
                         </button>
@@ -196,30 +216,43 @@ const Users = () => {
                                 <UserStatIcon1 />
                             </div>
                             <p className='stat-name'>USERS</p>
-                            <p className='stat-total'>2,453</p>
+                            <p className='stat-total'>{data.length}</p>
                         </div>
                         <div className="stat">
 
                             <UserStatIcon2 />
                             <p className='stat-name'>ACTIVE USERS</p>
-                            <p className='stat-total'>2,453</p>
+                            <p className='stat-total'>{data.filter((user:any) => user.status === 'active' ).length}</p>
                         </div>
                         <div className="stat">
                             <UserStatIcon3 />
                             <p className='stat-name'>USERS WITH LOANS</p>
-                            <p className='stat-total'>12,453</p>
+                            <p className='stat-total'>{data.filter((user:any) => user.additionalDetails.loanRepayment >= 1 ).length}</p>
                         </div>
                         <div className="stat">
                             <UserStatIcon4 />
                             <p className='stat-name'>USERS WITH SAVINGS</p>
-                            <p className='stat-total'>2,453</p>
+                            <p className='stat-total'>{data.filter((user:any) => user.additionalDetails.savings >= 1 ).length}</p>
                         </div>
                     </div>
                     <div className="users-table">
-                        <div className="table-d">
-                            {UsersDetailsTable(currentPosts)}
+                        <div className="filter">
+
+                            <button
+                                data-tooltip-id="filter-tooltip"
+                                data-tooltip-content="filter"
+                                data-tooltip-place="top"
+                                onClick={handleFilter}
+                            >
+                                <BiFilterAlt />
+                                <Tooltip id="filter-tooltip" />
+                            </button>
                         </div>
-                        <div className="table-pagination">
+                        <div table-loading={isLoading ? 'true' : 'false'} className={"table-d"}>
+                           {isLoading ? <Loading/> : isError ? <p>Error getting table.... </p> : (UsersDetailsTable(currentPosts))}
+                            {width! > 530 && (showFilter && <Filter handleFilter={handleFilter}/>)}
+                        </div>
+                        {!isLoading && !isError && <div className="table-pagination">
 
                             <Pagination
                                 totalPosts={data.length}
@@ -228,7 +261,7 @@ const Users = () => {
                                 currentPage={currentPage}
                             />
 
-                        </div>
+                        </div>}
                     </div>
                 </div>}
         </div>

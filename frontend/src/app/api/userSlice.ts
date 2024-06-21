@@ -6,7 +6,7 @@ export const getUsers = createAsyncThunk<User[], void>(
   'users/getUsers',
   async (_, thunkAPI) => {
     try {
-      const response = await api.get<User[]>('83d0259f-0003-4351-abdc-6855e8e5a05c');
+      const response = await api.get<User[]>('2d32fd9a-a765-458a-b7e3-92f2790a1ea0');
       return response.data; 
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.response?.data);

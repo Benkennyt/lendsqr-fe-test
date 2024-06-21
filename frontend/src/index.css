@@ -42,6 +42,11 @@ body {
 
 }
 
+button {
+  font-family: "Work Sans", sans-serif;
+  cursor: pointer;
+}
+
 @font-face {
   font-family: 'Avenir-B';
   src: url('./assets/fonts/avenir/AvenirNextLTPro-Bold.otf') format('opentype');

@@ -330,8 +330,9 @@
             }
 
             .hdn-right-side-cont {
-                width:100px !important;
+                width:70px !important;
                 margin-left: auto;
+                margin-right: 0px;
 
                 .docs {
                     display: none; 
@@ -344,14 +345,22 @@
                 .profile{
                     margin-left: 5px;
                     width: fit-content !important;
+                    padding: 2px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     p{
                         display: none;
                     }
 
+                    svg{
+                        display: none;
+                    }
+
                     &:hover::before {
-                        width: 70px;
+                        width: 54px;
                         height: 54px;
-                        padding: 5px;
+                        border-radius: 100vw;
                         background-color: var(--transparent-teal);
                     }
                 }

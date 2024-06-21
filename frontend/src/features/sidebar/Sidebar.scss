@@ -7,6 +7,8 @@
     box-sizing: border-box;
     color: var(--primary-color);
     background-color: var(--white);
+    scrollbar-width: thin;
+        scrollbar-color: var(--primary-color) #e7e7e7;
 
 
     &::-webkit-scrollbar {
@@ -24,6 +26,7 @@
         border-radius: 8px;
         background-color: var(--primary-color);
     }
+
 
     .logo {
         display: none;

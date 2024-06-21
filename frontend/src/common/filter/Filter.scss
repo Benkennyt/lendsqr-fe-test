@@ -1,0 +1,225 @@
+.filter-page{
+    position: absolute;
+    bottom: 40px;
+    width: 270px;
+    height: fit-content;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 4px;
+    padding: 20px;
+    box-sizing: border-box;
+
+    .inpt {
+        p {
+            font-size: .875rem;
+            font-weight: 500;
+            color: var(--bluish-gray);
+            margin-bottom: 5px;
+        }
+
+        
+        input,select{
+            width: 230px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--input-border);
+            padding-left: 10px;
+            box-sizing: border-box;
+            outline: none;
+
+            &::placeholder {
+                font-family: "Work Sans", sans-serif;
+                color: var(--bluish-gray);
+                opacity: 70%;
+            }
+            &:focus{
+                outline: none;
+                border-color: var(--bluish-gray);
+                
+            }
+        }
+
+        
+
+        .organization{
+            margin-top: 0px;
+            
+        }
+
+
+        .select{
+            position: relative; 
+
+            select{
+                font-family: "Work Sans", sans-serif;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                
+                appearance: none;
+                cursor: pointer;
+
+                &:required:invalid{
+                    color: #545f7db5;
+                }
+
+                
+
+                &:hover{
+                    stroke:red
+                }
+
+                option{
+                    color: var(--bluish-gray);
+                    &[value=""][disabled]{
+                        display: none
+                    }
+                    
+                }
+            }
+
+            svg{
+                position: absolute;
+                right: 20px;
+                top: 5px;
+                opacity: 80%;
+                & path{
+                    fill: var(--bluish-gray);
+                }
+            }
+
+            &:hover svg {
+                opacity: 1;
+            }
+        }
+    }
+
+    .date {
+        position: relative;
+
+        input[type='date']{
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            position: relative;
+            padding: 10px 40px 10px 10px;
+            font-size: .875rem;
+            font-family: "Work Sans", sans-serif;
+            color: var(--bluish-gray);
+            
+
+            &::before {
+                content: attr(placeholder);
+                position: absolute;
+                left: 10px;
+                color: grey;
+            }
+
+            &:valid::before {
+                content: "";
+                color: red;
+                background-color: white;
+                width: 100px;
+            }
+            &::-webkit-calendar-picker-indicator {
+                opacity: 0;
+                margin-right: -18px;
+                cursor: pointer;
+            }
+
+            
+        }
+
+        .custom-placeholder {
+            position: absolute;
+            left: 12px;
+            top: 50px;
+            transform: translateY(-65%);
+            pointer-events: none;
+            background-color: white;
+            width: 110px;
+            font-family: "Work Sans", sans-serif;
+            color:#545f7db5;
+            font-size: .875em;
+            font-weight: 400;
+           
+
+
+        }
+
+        
+
+
+        .date-svg {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(30%);
+            pointer-events: none;
+            cursor: pointer;
+            height: fit-content;
+            line-height: .1;
+            background-color: white;
+            width: 40px;
+            display: flex;
+            justify-content: right;
+        }
+
+        
+
+
+        
+
+    }
+
+
+    .reset-filter {
+        display: flex;
+        gap: 10px;
+        margin-top: 35px;
+        margin-bottom: 20px;
+        
+
+        button{
+            padding: 10px 30px;
+            border-radius: 8px;
+            font-size: .875rem;
+            font-weight: 600;
+            border: solid 1px var(--light-teal);
+            background-color: var(--light-teal);
+            color: white;
+            transition: all .2s ease;
+            &:hover {
+                filter: brightness(.9);
+            }
+        }
+
+        button:first-child{
+            color: var(--bluish-gray);
+            border: solid 1px var(--bluish-gray);
+            background-color: transparent;
+           
+
+            &:hover {
+                background-color: var(--bluish-gray);
+                color: white;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 531px) {
+    .filter-page{
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        padding-top: 70px;
+
+        .back-icon{
+            margin-bottom: 30px;
+        }
+
+        input, select{
+            width: 100% !important;
+        }
+    }
+}

@@ -16,6 +16,10 @@ import Users from '../users/Users';
 import ProfileIcon from '../../assets/svg/profile.svg';
 import DocsIcon from '../../assets/svg/docs.svg';
 import BellIcon2 from '../../assets/svg/bell2.svg';
+import useWindowResize from '../../hooks/useWindowResize';
+import Filter from '../../common/filter/Filter';
+
+
 
 
 const SearchBar = () => (
@@ -29,27 +33,35 @@ const SearchBar = () => (
 
 const ProfileMenu = (showProfileMore: any, setShowProfileMore: (index: boolean) => void) => (
   <div onMouseLeave={() => setShowProfileMore} show-more={showProfileMore ? 'true' : 'false'} className={"profile-more"}>
-          <div className="profile-name">
-            <p>Adedeji Bergson</p>
-          </div>
-          <button onClick={() => setShowProfileMore(false)}><ProfileIcon /><p> View your profile</p></button>
-          <button onClick={() => setShowProfileMore(false)}><BellIcon2 /><p> Notifications</p></button>
-          <button onClick={() => setShowProfileMore(false)}><DocsIcon /><p> Docs</p></button>
-          <button onClick={() => setShowProfileMore(false)} ><LogoutIcon /><p>Log out</p></button>
-        </div>
+    <div className="profile-name">
+      <p>Adedeji Bergson</p>
+    </div>
+    <button onClick={() => setShowProfileMore(false)}><ProfileIcon /><p> View your profile</p></button>
+    <button onClick={() => setShowProfileMore(false)}><BellIcon2 /><p> Notifications</p></button>
+    <button onClick={() => setShowProfileMore(false)}><DocsIcon /><p> Docs</p></button>
+    <button onClick={() => setShowProfileMore(false)} ><LogoutIcon /><p>Log out</p></button>
+  </div>
 )
 
 const Dashboard = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);
   const [showProfileMore, setShowProfileMore] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  const { width } = useWindowResize();
 
   const handleMobileNav = () => {
     setShowMobileNav(prevState => !prevState);
   };
 
+  const handleFilter = () => {
+    setShowFilter((prev)=> !prev)
+}
+
+
+
   return (
     <main className='dashboard-cont'>
-      <header>
+      {width! <= 530 && showFilter ? <Filter handleFilter={handleFilter}/> : <><header>
         <div className="logo">
           <Logo />
           <button
@@ -92,18 +104,16 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <button onClick={() => setShowProfileMore((prev)=> !prev)} className='more-icon'>
+        <button onClick={() => setShowProfileMore((prev) => !prev)} className='more-icon'>
           <BsThreeDotsVertical />
         </button>
 
         {ProfileMenu(showProfileMore, setShowProfileMore)}
 
-      </header>
-
-      <div className="dashboard-bdy">
-        <Sidebar showMobileNav={showMobileNav} />
-        <Users />
-      </div>
+      </header><div className="dashboard-bdy">
+          <Sidebar showMobileNav={showMobileNav} />
+          <Users showFilter={showFilter} handleFilter={handleFilter} />
+        </div></>}
     </main>
   );
 };
