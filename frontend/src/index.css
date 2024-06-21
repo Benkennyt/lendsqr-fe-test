@@ -10,6 +10,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 
   /* colors */
   --primary-color:#213F7D;
@@ -17,12 +18,15 @@
   --bluish-gray:#545F7D;
   --hover-grey:rgb(138, 138, 138);
   --input-border: #e7e8ea;
+  --profile-border: #545f7d32;
+  --table-border:#21407d20;
  --input-border-2:#545f7d20;
   --light-teal:#39CDCC;
   --transparent-teal:#39cdcd28;
   --transparent-teal-2:#39cdcd1e ;
   --white: white;
   --background: #FBFBFB;
+  --red:#E4033B;
 
 
 }

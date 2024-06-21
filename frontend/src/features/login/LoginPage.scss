@@ -27,7 +27,7 @@
       margin-top: 80px;
 
       h1 {
-        font-size: 2.5em;
+        font-size: 2.5rem;
         font-family: Avenir-B;
         color: var(--primary-color);
         margin-bottom: 10px;
@@ -35,7 +35,7 @@
       }
 
       p {
-        font-size: 1.25em;
+        font-size: 1.25rem;
         font-family: Avenir-R;
         margin: 0px;
         color: var(--text-color);
@@ -64,7 +64,7 @@
             border: none;
             border-radius: 5px;
             box-sizing: border-box;
-            font-size: .9em;
+            font-size: .9rem;
             font-family: Avenir-R;
             height: 100%;
             outline: 0;
@@ -95,7 +95,7 @@
             color: var(--placeholder);
             opacity: 60%;
             font-family: Avenir-R;
-            font-size: .9em;
+            font-size: .9rem;
             left: 20px;
             line-height: 14px;
             pointer-events: none;
@@ -113,7 +113,7 @@
             align-items: center;
             padding: 5px 20px 5px 5px;
             color: var(--light-teal);
-            font-size: .75em;
+            font-size: .75rem;
             font-family: Avenir-M;
             letter-spacing: 1px;
             cursor: pointer;
@@ -127,7 +127,7 @@
           cursor: pointer;
           font-family: Avenir-M;
           font-weight: 400 !important;
-          font-size: .75em;
+          font-size: .75rem;
           letter-spacing: 2px;
           margin-top: 25px;
           transition: all .2s ease;
@@ -148,7 +148,7 @@
           border-radius: 8px;
           background: var(--light-teal);
           color: var(--white);
-          font-size: .9em;
+          font-size: .9rem;
           font-family: Avenir-M;
           margin-top: 30px;
           cursor: pointer;

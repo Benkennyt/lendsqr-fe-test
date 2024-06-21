@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import App from "../../App";
-import LoginPage from "../../components/login/LoginPage";
-import Dashboard from "../../components/dashboard/Dashboard";
+import LoginPage from "../../features/login/LoginPage";
+import Dashboard from "../../features/dashboard/Dashboard";
+
 
 
 

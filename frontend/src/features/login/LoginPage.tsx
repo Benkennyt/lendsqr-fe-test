@@ -3,7 +3,6 @@ import LeftSvg from '../../assets/svg/pablo-sign-in 1.svg';
 
 import Logo from '../../assets/svg/logo.svg'
 import { useState } from 'react';
-import { IoIosMenu } from 'react-icons/io';
 
 const LoginPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);

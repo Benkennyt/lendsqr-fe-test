@@ -1,0 +1,12 @@
+.app{
+    display: flex;
+    max-width: 2300px;
+}
+
+@media screen and (min-width: 2300px) {
+    :root {
+        width: 2300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

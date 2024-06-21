@@ -2,7 +2,10 @@
     width: 100vw;
     background: var(--background);
     display: grid;
+    overflow: hidden;
+    position: relative;
 
+    
     
 
     .search-bar {
@@ -19,7 +22,7 @@
             border: none;
             border-radius: 5px;
             box-sizing: border-box;
-            font-size: .9em;
+            font-size: .9rem;
             font-family: "Work Sans", sans-serif;
             height: 100%;
             outline: 0;
@@ -28,7 +31,7 @@
 
             &::placeholder {
                 color: var(--bluish-gray);
-                font-size: .9em;
+                font-size: .9rem;
                 opacity: 70%;
                 font-family: "Work Sans", sans-serif;
             }
@@ -60,6 +63,7 @@
         background: var(--white);
         color: var(--primary-color);
         z-index: 1000;
+        overflow: hidden;
 
 
         .logo {
@@ -107,6 +111,7 @@
 
 
             .notification-icon {
+                position: relative;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -115,16 +120,35 @@
                 aspect-ratio: 1;
                 border-radius: 50%;
                 transition: all .2s ease-out;
+                z-index: 5;
+               
 
                 svg {
                     cursor: pointer;
 
                 }
+                
 
-                &:hover {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 0;
+                    height: 0;
+                    margin: auto;
+                    border-radius: 50%;
                     background-color: var(--transparent-teal);
+                    transition: all .2s ease;
+                    z-index: 2 !important;
+                }
+
+                &:hover::before {
                     width: 40px;
-                    aspect-ratio: 1;
+                    height: 40px;
+                    background-color: var(--transparent-teal);
                 }
 
             }
@@ -196,14 +220,74 @@
         }
     }
 
-        .dashboard-bdy {
+    .dashboard-bdy {
+        display: flex;
+        height: calc(100vh - 100px);
+        
+    }
+
+    .profile-more {
+        display: none;
+        position: absolute;
+        top: 41px;
+        right: 13px;
+        width: 210px;
+        height: fit-content;
+        margin-top: 40px;
+        overflow: hidden;
+        background-color: white;
+        padding:0 0 10px 0;
+        border-radius: 5px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        z-index: 200;
+        box-sizing: border-box;
+
+        .profile-name{
             display: flex;
-    
+            padding-left: 20px;
+            background-color: var(--transparent-color);
+            height: 60px;
+            align-items: center;
+
+            p{
+                margin: 0;
+            }
+        }
+
+        button {
+            border: none;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            width:100%;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            border-left: 2px solid transparent;
+            cursor: pointer;
+
+            &:hover{
+                background-color: var(--transparent-teal);
+                border-left: 2px solid var(--light-teal);
+            }
+
             
         }
+    }
 
     
 }
+
+@media screen and (min-width: 2300px) {
+    .dashboard-cont {
+     width: 2300px ;
+
+     header {
+        width: 2300px ;
+     }
+    }
+
+ }
 
 
 @media screen and (max-width: 860px) {
@@ -237,6 +321,8 @@
                     }
                 }
 
+                
+
             }
 
             .search-bar {
@@ -261,6 +347,13 @@
                     p{
                         display: none;
                     }
+
+                    &:hover::before {
+                        width: 70px;
+                        height: 54px;
+                        padding: 5px;
+                        background-color: var(--transparent-teal);
+                    }
                 }
             }
 
@@ -273,11 +366,22 @@
                 border: none;
                 width: 25px;
                 height: 25px;
+                cursor: pointer;
                 svg {
                     height: 25px;
                     width: 25px;
                     color: var(--primary-color);
                     transition: transform 350ms ease-in-out;
+                }
+            }
+
+            .profile-more{
+                display: block;
+                transform: translateX(120%);
+                transition: transform 350ms ease-in-out;
+
+                &[show-more="true"] {
+                    transform: translateX(0);
                 }
             }
         }

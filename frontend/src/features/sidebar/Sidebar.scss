@@ -3,8 +3,11 @@
     height: calc(100vh - 100px);
     overflow: auto;
     padding-top: 25px;
+    padding-bottom: 25px;
+    box-sizing: border-box;
     color: var(--primary-color);
     background-color: var(--white);
+
 
     &::-webkit-scrollbar {
         width: 7px;
@@ -28,7 +31,7 @@
 
     .switch-organization,
     .dashboard {
-        font-size: 1em;
+        font-size: 1rem;
         font-weight: 400;
         display: flex;
         justify-content: space-between;
@@ -63,8 +66,9 @@
 
     .hds {
         
+        margin-top: 30px;
         p {
-            font-size: .75em;
+            font-size: .75rem;
             font-weight: 500;
             color: --bluish-gray;
             padding-left: 33px;
@@ -79,7 +83,7 @@
 
 
             li {
-                font-size: 1em;
+                font-size: 1rem;
                 font-weight: 400;
                 display: flex;
                 align-items: center;
@@ -106,6 +110,31 @@
 
     }
 
+    .logout{
+        border-top: 1px solid rgb(229, 229, 229);
+        margin-top: 60px;
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        padding-left: 30px;
+        gap: 50px;
+
+        button{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 0;
+            width: fit-content;
+            border: none;
+            background-color: transparent;
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--primary-color);
+            
+        }
+    }
+
 }
 
 @media screen and (max-width: 860px) {
@@ -123,16 +152,21 @@
         z-index:50;
        
         &[data-visible="true"] {
-            transform: translateY(.5%);
+            transform: translateY(0.2%);
         }
 
         .logo {
             display: flex;
+            width: fit-content;
+            height: fit-content;
             padding-left: 33px;
             margin-top: -10px;
             margin-bottom: 50px;
+            
             svg {
-                width: 120px;
+                padding-top: 30px;
+                width: 180px;
+                height: auto;
             }
         }
         
@@ -152,6 +186,10 @@
             }
         }
 
+        .logout{
+            display: none;
+        }
+
     }
 }
 
@@ -166,7 +204,7 @@
 
 @media screen and (max-width: 398px) {
     .sidebar {
-        padding-top: 178px !important;
+        padding-top: 218px !important;
         transform: translateX(-120%);
     
         &[data-visible="true"] {

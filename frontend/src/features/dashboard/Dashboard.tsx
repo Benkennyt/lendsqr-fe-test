@@ -4,6 +4,7 @@ import SearchIcon from '../../assets/svg/search-icon.svg';
 import BellIcon from '../../assets/svg/Bell.svg';
 import DropDownIcon from '../../assets/svg/dropdown.svg';
 import Avatar from '../../assets/image/avatar.png';
+import LogoutIcon from '../../assets/svg/logout.svg';
 import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -12,6 +13,9 @@ import Sidebar from '../sidebar/Sidebar';
 import { Tooltip } from 'react-tooltip';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import Users from '../users/Users';
+import ProfileIcon from '../../assets/svg/profile.svg';
+import DocsIcon from '../../assets/svg/docs.svg';
+import BellIcon2 from '../../assets/svg/bell2.svg';
 
 
 const SearchBar = () => (
@@ -23,8 +27,21 @@ const SearchBar = () => (
   </div>
 );
 
+const ProfileMenu = (showProfileMore: any, setShowProfileMore: (index: boolean) => void) => (
+  <div onMouseLeave={() => setShowProfileMore} show-more={showProfileMore ? 'true' : 'false'} className={"profile-more"}>
+          <div className="profile-name">
+            <p>Adedeji Bergson</p>
+          </div>
+          <button onClick={() => setShowProfileMore(false)}><ProfileIcon /><p> View your profile</p></button>
+          <button onClick={() => setShowProfileMore(false)}><BellIcon2 /><p> Notifications</p></button>
+          <button onClick={() => setShowProfileMore(false)}><DocsIcon /><p> Docs</p></button>
+          <button onClick={() => setShowProfileMore(false)} ><LogoutIcon /><p>Log out</p></button>
+        </div>
+)
+
 const Dashboard = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);
+  const [showProfileMore, setShowProfileMore] = useState(false);
 
   const handleMobileNav = () => {
     setShowMobileNav(prevState => !prevState);
@@ -75,14 +92,17 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <button className='more-icon'>
+        <button onClick={() => setShowProfileMore((prev)=> !prev)} className='more-icon'>
           <BsThreeDotsVertical />
         </button>
+
+        {ProfileMenu(showProfileMore, setShowProfileMore)}
+
       </header>
 
       <div className="dashboard-bdy">
         <Sidebar showMobileNav={showMobileNav} />
-        <Users/>
+        <Users />
       </div>
     </main>
   );

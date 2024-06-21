@@ -21,6 +21,8 @@ import PreferencesIcon from '../../assets/svg/preferences.svg';
 import FeesPIcon from '../../assets/svg/feesP.svg';
 import AuditLIcon from '../../assets/svg/audit.svg';
 import Logo from '../../assets/svg/logo2.svg';
+import SystemIcon from '../../assets/svg/system.svg';
+import LogoutIcon from '../../assets/svg/logout.svg';
 
 
 
@@ -83,7 +85,14 @@ const Sidebar = (props: SidebarProps) => {
                             <li><PreferencesIcon /><a >Preferences</a></li>
                             <li><FeesPIcon /><a>Fees and Pricing</a></li>
                             <li><AuditLIcon /><a >Audit Logs</a></li>
+                            <li><SystemIcon /><a >System Messages</a></li>
                         </ul>
+                    </div>
+
+                    <div className=" logout">
+                        <button><LogoutIcon/> Logout</button>
+
+                        v1.2.0
                     </div>
                 </nav>
   )
