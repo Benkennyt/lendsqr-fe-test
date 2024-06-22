@@ -5,7 +5,7 @@ import BellIcon from '../../assets/svg/Bell.svg';
 import DropDownIcon from '../../assets/svg/dropdown.svg';
 import Avatar from '../../assets/image/avatar.png';
 import LogoutIcon from '../../assets/svg/logout.svg';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { AiOutlineClose } from 'react-icons/ai';
 import { IoDocumentTextOutline } from 'react-icons/io5';
@@ -18,6 +18,7 @@ import DocsIcon from '../../assets/svg/docs.svg';
 import BellIcon2 from '../../assets/svg/bell2.svg';
 import useWindowResize from '../../hooks/useWindowResize';
 import Filter from '../../common/filter/Filter';
+import useClickOutside from '../../hooks/useClickOutside';
 
 
 
@@ -31,17 +32,28 @@ const SearchBar = () => (
   </div>
 );
 
-const ProfileMenu = (showProfileMore: any, setShowProfileMore: (index: boolean) => void) => (
-  <div onMouseLeave={() => setShowProfileMore} show-more={showProfileMore ? 'true' : 'false'} className={"profile-more"}>
-    <div className="profile-name">
-      <p>Adedeji Bergson</p>
+
+const ProfileMenu = (showProfileMore: boolean, setShowProfileMore: (show: boolean) => void) => {
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+  useClickOutside(profileMenuRef, () => setShowProfileMore(false));
+
+  return (
+    <div
+      ref={profileMenuRef}
+      onMouseLeave={() => setShowProfileMore(false)}
+      show-more={showProfileMore ? 'true' : 'false'}
+      className="profile-more"
+    >
+      <div className="profile-name">
+        <p>Adedeji Bergson</p>
+      </div>
+      <button onClick={() => setShowProfileMore(false)}><ProfileIcon /><p> View your profile</p></button>
+      <button onClick={() => setShowProfileMore(false)}><BellIcon2 /><p> Notifications</p></button>
+      <button onClick={() => setShowProfileMore(false)}><DocsIcon /><p> Docs</p></button>
+      <button onClick={() => setShowProfileMore(false)} ><LogoutIcon /><p>Log out</p></button>
     </div>
-    <button onClick={() => setShowProfileMore(false)}><ProfileIcon /><p> View your profile</p></button>
-    <button onClick={() => setShowProfileMore(false)}><BellIcon2 /><p> Notifications</p></button>
-    <button onClick={() => setShowProfileMore(false)}><DocsIcon /><p> Docs</p></button>
-    <button onClick={() => setShowProfileMore(false)} ><LogoutIcon /><p>Log out</p></button>
-  </div>
-)
+  );
+};
 
 const Dashboard = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);

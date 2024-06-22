@@ -10,7 +10,7 @@ import BlackListIcon from '../../assets/svg/blacklist.svg';
 import ActivateUser from '../../assets/svg/activateuser.svg';
 import TableMoreIcon from '../../assets/svg/three dots.svg';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getUsers } from '../../app/api/userSlice';
 import { useAppDispatch } from '../../app/stores/stores';
 import Pagination from '../../common/Pagination';
@@ -20,6 +20,7 @@ import { BiFilterAlt } from 'react-icons/bi';
 import { Tooltip } from 'react-tooltip';
 import Loading from '../../common/loading/Loading';
 import Filter from '../../common/filter/Filter';
+import useClickOutside from '../../hooks/useClickOutside';
 
 interface UsersProps {
     showFilter: boolean;
@@ -43,6 +44,9 @@ const Users = (props:UsersProps) => {
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentPosts = data1.slice(firstPostIndex, lastPostIndex)
     const { width } = useWindowResize();
+    const panelRef = useRef<HTMLDivElement>(null);
+
+    useClickOutside(panelRef, () => setIsPanelVisible(false));
     
 
 
@@ -190,7 +194,7 @@ const Users = (props:UsersProps) => {
                                 <TableMoreIcon />
                             </button>
 
-                            {isPanelVisible && rowIndex === index && <div onMouseLeave={() => setIsPanelVisible(false)} className="user-m-p">
+                            {isPanelVisible && rowIndex === index && <div ref={panelRef} onMouseLeave={() => setIsPanelVisible(false)} className="user-m-p">
                                 <button onClick={() => handleUserDetails(row.id)}><EyeIcon /> View Details</button>
                                 <button onClick={() => setIsPanelVisible(false)}><BlackListIcon /> Blacklist User</button>
                                 <button onClick={() => setIsPanelVisible(false)}><ActivateUser /> Activate User</button>

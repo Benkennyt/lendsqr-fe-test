@@ -25,6 +25,8 @@ const UserDetails = (props: UserDetailsProps) => {
         } else {
             setUserData(getObject('userData'))
         }
+
+        
     }, [])
 
     const formatNumber = (num: any) => {

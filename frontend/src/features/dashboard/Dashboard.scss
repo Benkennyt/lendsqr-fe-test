@@ -239,7 +239,7 @@
         padding:0 0 10px 0;
         border-radius: 5px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        z-index: 200;
+        z-index: 10000;
         box-sizing: border-box;
 
         .profile-name{
@@ -391,6 +391,7 @@
 
                 &[show-more="true"] {
                     transform: translateX(0);
+                    z-index: 10000;
                 }
             }
         }

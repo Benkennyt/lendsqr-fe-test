@@ -26,6 +26,7 @@
             padding-left: 10px;
             box-sizing: border-box;
             outline: none;
+            background-color: white;
 
             &::placeholder {
                 font-family: "Work Sans", sans-serif;
@@ -105,6 +106,7 @@
             font-size: .875rem;
             font-family: "Work Sans", sans-serif;
             color: var(--bluish-gray);
+            
             
 
             &::before {
