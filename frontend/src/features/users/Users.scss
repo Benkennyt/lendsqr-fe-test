@@ -165,10 +165,8 @@
                     tbody {
                       
                         tr {
-                           
                             border-bottom: 1px solid var(--table-border);
                             width: 100%;
-                            position: relative !important;
 
                             &:last-child {
                                 border: none;
@@ -178,6 +176,7 @@
                                 font-size: .88rem;
                                 font-weight: 400;
                                 color: var(--bluish-gray);
+                                position: relative;
                                 button {
                                     
                                     width: 15px;
@@ -198,7 +197,7 @@
                                     width: 180px;
                                     height: 130px;
                                     right: 0;
-                                    transform: translate(0,-40%);
+                                    transform: translate(0,-50%);
                                     padding: 5px 0px;
                                     background-color: white;
                                     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;

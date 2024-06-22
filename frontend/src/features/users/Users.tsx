@@ -182,7 +182,7 @@ const Users = (props:UsersProps) => {
             </thead>
             <tbody>
                 {data.map((row: User, index: number) => (
-                    <tr key={index}>
+                   <tr key={index}>
                         <td>{row.organization}</td>
                         <td>{row.username}</td>
                         <td>{row.email}</td>
