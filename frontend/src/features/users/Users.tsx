@@ -194,7 +194,7 @@ const Users = (props:UsersProps) => {
                                 <TableMoreIcon />
                             </button>
 
-                            {isPanelVisible && rowIndex === index && <div ref={panelRef} onMouseLeave={() => setIsPanelVisible(false)} className="user-m-p">
+                            {isPanelVisible && rowIndex === index && <div ref={panelRef} className="user-m-p">
                                 <button onClick={() => handleUserDetails(row.id)}><EyeIcon /> View Details</button>
                                 <button onClick={() => setIsPanelVisible(false)}><BlackListIcon /> Blacklist User</button>
                                 <button onClick={() => setIsPanelVisible(false)}><ActivateUser /> Activate User</button>

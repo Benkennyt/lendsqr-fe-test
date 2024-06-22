@@ -223,6 +223,7 @@
     .dashboard-bdy {
         display: flex;
         height: calc(100vh - 100px);
+        z-index: 1;
         
     }
 
@@ -241,6 +242,7 @@
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         z-index: 10000;
         box-sizing: border-box;
+        color: var(--primary-color);
 
         .profile-name{
             display: flex;
@@ -264,6 +266,7 @@
             margin-bottom: 10px;
             padding-left: 15px;
             border-left: 2px solid transparent;
+            color: var(--primary-color);
             cursor: pointer;
 
             &:hover{
