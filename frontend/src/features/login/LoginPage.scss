@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  box-sizing: border-box;
 
   .login-pg-svg-form {
     display: flex;
@@ -181,6 +181,7 @@
     .login-pg-svg-form {
       display: block;
       padding: 30px 45px;
+      box-sizing: border-box;
 
 
       .login-leftsvg svg:nth-child(2) {
@@ -190,6 +191,7 @@
       .login-pg-lg {
         width: 100% !important;
         margin: 0px !important;
+
       }
 
 
