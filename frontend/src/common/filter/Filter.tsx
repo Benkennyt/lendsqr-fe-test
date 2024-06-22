@@ -5,6 +5,7 @@ import CalenderIcon from '../../assets/svg/calender.svg';
 import BackIcon from '../../assets/svg/back.svg';
 import useWindowResize from '../../hooks/useWindowResize';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import useClickOutside from '../../hooks/useClickOutside';
 
 interface FilterProps {
     handleFilter: () => void;
@@ -24,6 +25,8 @@ const Filter = (props: FilterProps) => {
     const [dateHasValue, setDateHasValue] = useState(false);
     const dateInputRef = useRef<HTMLInputElement>(null);
     const { width } = useWindowResize();
+    const FilterRef = useRef<HTMLDivElement>(null);
+    useClickOutside(FilterRef, () => handleFilter());
 
 
 
@@ -42,8 +45,11 @@ const toggleDatePicker = () => {
     }
   };
 
+  
+    
+
     return (
-        <div className="filter-page">
+        <div ref={FilterRef} className="filter-page">
             {width! <= 530 && <div onClick={handleFilter} className="back-icon">
                 <BackIcon />
             </div>}
@@ -63,8 +69,7 @@ const toggleDatePicker = () => {
                                     as="select"
                                     id="organization"
                                     name="organization"
-                                    required
-                               
+                                    required  
                                 >
                                     <option value="" disabled>Select</option>
                                     <option value="#">Option 1</option>

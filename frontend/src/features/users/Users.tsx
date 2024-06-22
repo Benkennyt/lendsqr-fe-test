@@ -15,28 +15,27 @@ import { getUsers } from '../../app/api/userSlice';
 import { useAppDispatch } from '../../app/stores/stores';
 import Pagination from '../../common/Pagination';
 import useWindowResize from '../../hooks/useWindowResize';
-import UserDetails from './userDetails/UserDetails';
 import { BiFilterAlt } from 'react-icons/bi';
 import { Tooltip } from 'react-tooltip';
 import Loading from '../../common/loading/Loading';
 import Filter from '../../common/filter/Filter';
 import useClickOutside from '../../hooks/useClickOutside';
+import { useNavigate } from 'react-router-dom';
 
 interface UsersProps {
     showFilter: boolean;
     handleFilter: () => void;
+    Topref: any;
 }
 
-const Users = (props:UsersProps) => {
-    const{ showFilter, handleFilter} = props;
-    const { data , isLoading, isError} = useSelector((state: any) => state.users);
+const Users = (props: UsersProps) => {
+    const { showFilter, handleFilter } = props;
+    const {data, isLoading, isError, errorMessage } = useSelector((state: any) => state.users);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(9);
-    const [data1, setData1] = useState<User[]>(data);
+    const [data1, setData1] = useState<User[]>([]);
     const [isPanelVisible, setIsPanelVisible] = useState(false)
-    const [userId, setUserId] = useState('')
     const [rowIndex, setRowIndex] = useState<null | number>(null)
-    const [showUserDetails, setShowUserDetails] = useState<null | boolean>(false);
     const [sortConfig, setSortConfig] = useState({ key: 'id', direction: 'descending' });
     const [inverseSortIcon, setInverseSortIcon] = useState('');
     const dispatch = useAppDispatch()
@@ -45,19 +44,14 @@ const Users = (props:UsersProps) => {
     const currentPosts = data1.slice(firstPostIndex, lastPostIndex)
     const { width } = useWindowResize();
     const panelRef = useRef<HTMLDivElement>(null);
-
     useClickOutside(panelRef, () => setIsPanelVisible(false));
-    
+    const navigate = useNavigate()
+
 
 
     useEffect(() => {
         dispatch(getUsers())
     }, [])
-
-    useEffect(() => {
-        setShowUserDetails(getBoolean('showDetails'))
-    }, [userId])
-
 
     useEffect(() => {
         sortData('dateJoined')
@@ -85,30 +79,32 @@ const Users = (props:UsersProps) => {
             direction = 'ascending';
         }
 
-        const sortedData = [...data].sort((a, b) => {
+       
+            const sortedData = [...data].sort((a, b) => {
 
-            if (key === 'dateJoined') {
-                const dateA = new Date(Date.parse(a[key]));
-                const dateB = new Date(Date.parse(b[key]));
-                if (direction === 'descending') {
-                    return dateA > dateB ? -1 : 1;
+                if (key === 'dateJoined') {
+                    const dateA = new Date(Date.parse(a[key]));
+                    const dateB = new Date(Date.parse(b[key]));
+                    if (direction === 'descending') {
+                        return dateA > dateB ? -1 : 1;
+                    } else {
+                        return dateA < dateB ? -1 : 1;
+                    }
                 } else {
-                    return dateA < dateB ? -1 : 1;
+                    if (a[key] < b[key]) {
+                        return direction === 'descending' ? -1 : 1;
+                    }
+                    if (a[key] > b[key]) {
+                        return direction === 'descending' ? 1 : -1;
+                    }
+                    return 0;
                 }
-            } else {
-                if (a[key] < b[key]) {
-                    return direction === 'descending' ? -1 : 1;
-                }
-                if (a[key] > b[key]) {
-                    return direction === 'descending' ? 1 : -1;
-                }
-                return 0;
-            }
-        });
+            });
+            setData1(sortedData);
+            setSortConfig({ key, direction });
+            setCurrentPage(1)
+     
 
-        setData1(sortedData);
-        setSortConfig({ key, direction });
-        setCurrentPage(1)
     };
 
     const handleDataSorting = (key: string, name: string) => {
@@ -127,15 +123,12 @@ const Users = (props:UsersProps) => {
     }
 
     const handleUserDetails = (id: string) => {
-        localStorage.setItem('showDetails', JSON.stringify(true));
-        setUserId(id)
+        localStorage.setItem('userId', (id));
         setIsPanelVisible(false)
+        navigate(`/users/${id}`)
+        
     }
 
-    const getBoolean = (key: string): boolean | null => {
-        const value = localStorage.getItem(key);
-        return value !== null ? JSON.parse(value) : null;
-    }
 
 
     const UsersDetailsTable = (data: any) => (
@@ -182,7 +175,7 @@ const Users = (props:UsersProps) => {
             </thead>
             <tbody>
                 {data.map((row: User, index: number) => (
-                   <tr key={index}>
+                    <tr key={index}>
                         <td>{row.organization}</td>
                         <td>{row.username}</td>
                         <td>{row.email}</td>
@@ -206,66 +199,66 @@ const Users = (props:UsersProps) => {
         </table>
     );
 
+    console.log(data1)
 
     return (
         <div className="content-display">
-            {showUserDetails ? <UserDetails setShowUserDetails={setShowUserDetails} userId={userId} setUserId={setUserId} /> :
-                <div className='users-content'>
-                    <h1>Users</h1>
-                    <div className="users-stats">
-                        <div className="stat">
-                            <div className='stat-icon'>
-                                <UserStatIcon1 />
-                            </div>
-                            <p className='stat-name'>USERS</p>
-                            <p className='stat-total'>{data.length}</p>
+            <div className='users-content'>
+                <h1>Users</h1>
+                <div className="users-stats">
+                    <div className="stat">
+                        <div className='stat-icon'>
+                            <UserStatIcon1 />
                         </div>
-                        <div className="stat">
-
-                            <UserStatIcon2 />
-                            <p className='stat-name'>ACTIVE USERS</p>
-                            <p className='stat-total'>{data.filter((user:any) => user.status === 'active' ).length}</p>
-                        </div>
-                        <div className="stat">
-                            <UserStatIcon3 />
-                            <p className='stat-name'>USERS WITH LOANS</p>
-                            <p className='stat-total'>{data.filter((user:any) => user.additionalDetails.loanRepayment >= 1 ).length}</p>
-                        </div>
-                        <div className="stat">
-                            <UserStatIcon4 />
-                            <p className='stat-name'>USERS WITH SAVINGS</p>
-                            <p className='stat-total'>{data.filter((user:any) => user.additionalDetails.savings >= 1 ).length}</p>
-                        </div>
+                        <p className='stat-name'>USERS</p>
+                        <p className='stat-total'>{isLoading || data1.length === 0 || isError ? 0 : data?.length}</p>
                     </div>
-                    <div className="users-table">
-                        <div className="filter">
+                    <div className="stat">
 
-                            <button
-                                data-tooltip-id="filter-tooltip"
-                                data-tooltip-content="filter"
-                                data-tooltip-place="top"
-                                onClick={handleFilter}
-                            >
-                                <BiFilterAlt />
-                                <Tooltip id="filter-tooltip" />
-                            </button>
-                        </div>
-                        <div table-loading={isLoading ? 'true' : 'false'} className={"table-d"}>
-                           {isLoading ? <Loading/> : isError ? <p>Error getting table.... </p> : (UsersDetailsTable(currentPosts))}
-                            {width! > 530 && (showFilter && <Filter handleFilter={handleFilter}/>)}
-                        </div>
-                        {!isLoading && !isError && <div className="table-pagination">
-
-                            <Pagination
-                                totalPosts={data.length}
-                                setCurrentPage={setCurrentPage}
-                                postsPerPage={postsPerPage}
-                                currentPage={currentPage}
-                            />
-
-                        </div>}
+                        <UserStatIcon2 />
+                        <p className='stat-name'>ACTIVE USERS</p>
+                        <p className='stat-total'>{isLoading || data1.length === 0 || isError ? 0 : data?.filter((user: any) => user.status === 'active').length}</p>
                     </div>
-                </div>}
+                    <div className="stat">
+                        <UserStatIcon3 />
+                        <p className='stat-name'>USERS WITH LOANS</p>
+                        <p className='stat-total'>{isLoading || data1.length === 0 || isError ? 0 : data?.filter((user: any) => user.additionalDetails.loanRepayment >= 1).length}</p>
+                    </div>
+                    <div className="stat">
+                        <UserStatIcon4 />
+                        <p className='stat-name'>USERS WITH SAVINGS</p>
+                        <p className='stat-total'>{isLoading || data1.length === 0 || isError ? 0 : data?.filter((user: any) => user.additionalDetails.savings >= 1).length}</p>
+                    </div>
+                </div>
+                <div className="users-table">
+                    <div className="filter">
+
+                        <button
+                            data-tooltip-id="filter-tooltip"
+                            data-tooltip-content="filter"
+                            data-tooltip-place="top"
+                            onClick={handleFilter}
+                        >
+                            <BiFilterAlt />
+                            <Tooltip id="filter-tooltip" />
+                        </button>
+                    </div>
+                    <div table-loading={isLoading || data1.length === 0 ? 'true' : 'false'} className={"table-d"}>
+                        {isLoading || data1.length < 1 && !isError ? <Loading /> : isError ? <p>{errorMessage}</p> : (UsersDetailsTable(currentPosts))}
+                        {width! > 530 && (showFilter && <Filter handleFilter={handleFilter} />)}
+                    </div>
+                    {!isLoading && !isError && data1.length > 0 && <div className="table-pagination">
+
+                        <Pagination
+                            totalPosts={data.length}
+                            setCurrentPage={setCurrentPage}
+                            postsPerPage={postsPerPage}
+                            currentPage={currentPage}
+                        />
+
+                    </div>}
+                </div>
+            </div>
         </div>
     )
 }
