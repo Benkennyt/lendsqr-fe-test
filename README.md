@@ -14,23 +14,34 @@ This project is a test assignment for Lendsqr, designed to demonstrate my profic
 frontend/
 ├── public/
 ├── src/
-│   ├── api/
-│   │   └── mockApi.js
-│   ├── components/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── models/
+│   │   ├── router/
+│   │   └──  stores/
+│   ├── assets/
+│   │   ├── fonts/
+│   │   ├── image/
+│   │   ├── svg/
+│   ├── commom/
+│   │   ├── filter/
+│   │   ├── loading/
+│   │   ├── Pagination.scss
+│   │   └── Pagination.tsx
+│   ├── features/
 │   │   ├── login/
 │   │   ├── dashboard/
-│   │   ├── UserPage.tsx
-│   │   └── UserDetailsPage.tsx
-│   ├── assets/
+│   │   ├── sidebar/
+│   │   └── users/
+│   ├── hooks/
+│   │   └── useWindowResize.tsx
 │   ├── App.tsx
 │   ├── main.tsx
-│   ├── routes.tsx
 ├── index.html
 ├── .gitignore
 ├── package.json
 ├── README.md
 ├── vite.config.js
-└── yarn.lock
 ```
 
 ## Setup and Installation
@@ -79,13 +90,8 @@ frontend/
 - **Path:** `/users`
 - **Description:** Displays a list of users fetched from the mock API. Users can click on a user to view more details.
 
-### User Details Page
-- **Path:** `/users/:id`
-- **Description:** Displays detailed information about a specific user based on the ID passed in the URL.
 
 ## API Integration
 - **Mock API:** A mock API with 500 records is used for data fetching.
 - **API File:** `src/api/mockApi.js` contains functions to fetch data from the mock API.
 
-```javascript
-// src/api/mockApi.tsx

@@ -33,7 +33,7 @@ const Sidebar = (props: SidebarProps) => {
     const {showMobileNav} = props;
 
   return (
-    <nav id='sidebar' className='sidebar' data-visible={showMobileNav ? 'true' : 'false'}>
+    <nav id='sidebar' data-testid='sidebar' className='sidebar' data-visible={showMobileNav ? 'true' : 'false'}>
                     <div className="switch-dash">
                         <div className="logo">
                             <Logo/>

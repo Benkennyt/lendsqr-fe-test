@@ -126,8 +126,6 @@ const Users = (props:UsersProps) => {
         localStorage.setItem('showDetails', JSON.stringify(true));
         setUserId(id)
         setIsPanelVisible(false)
-
-
     }
 
     const getBoolean = (key: string): boolean | null => {

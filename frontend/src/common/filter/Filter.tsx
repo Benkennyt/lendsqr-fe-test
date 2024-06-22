@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import './Filter.scss'
 import ArronDownIcon from '../../assets/svg/dropdown2.svg';
 import CalenderIcon from '../../assets/svg/calender.svg';
@@ -22,7 +22,6 @@ const initialValues = {
 const Filter = (props: FilterProps) => {
     const { handleFilter } = props;
     const [dateHasValue, setDateHasValue] = useState(false);
-    const [showDatePicker, setShowDatePicker] = useState(false);
     const dateInputRef = useRef<HTMLInputElement>(null);
     const { width } = useWindowResize();
 

@@ -50,11 +50,11 @@ const Dashboard = () => {
   const { width } = useWindowResize();
 
   const handleMobileNav = () => {
-    setShowMobileNav(prevState => !prevState);
+    setShowMobileNav(prev => !prev);
   };
 
   const handleFilter = () => {
-    setShowFilter((prev)=> !prev)
+    setShowFilter(prev => !prev)
 }
 
 
