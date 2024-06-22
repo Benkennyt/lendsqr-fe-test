@@ -5,7 +5,7 @@ import BellIcon from '../../assets/svg/Bell.svg';
 import DropDownIcon from '../../assets/svg/dropdown.svg';
 import Avatar from '../../assets/image/avatar.png';
 import LogoutIcon from '../../assets/svg/logout.svg';
-import { useRef, useState } from 'react';
+import { useState, useRef } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { AiOutlineClose } from 'react-icons/ai';
 import { IoDocumentTextOutline } from 'react-icons/io5';
@@ -20,9 +20,6 @@ import useWindowResize from '../../hooks/useWindowResize';
 import Filter from '../../common/filter/Filter';
 import useClickOutside from '../../hooks/useClickOutside';
 
-
-
-
 const SearchBar = () => (
   <div className="search-bar">
     <input type="text" placeholder='Search for anything' />
@@ -32,18 +29,12 @@ const SearchBar = () => (
   </div>
 );
 
-
-const ProfileMenu = (showProfileMore: boolean, setShowProfileMore: (show: boolean) => void) => {
-  const profileMenuRef = useRef<HTMLDivElement>(null);
-  useClickOutside(profileMenuRef, () => setShowProfileMore(false));
+const ProfileMenu = ({ showProfileMore, setShowProfileMore }: any) => {
+  const ref = useRef<HTMLDivElement>(null);
+  useClickOutside(ref, () => setShowProfileMore(false));
 
   return (
-    <div
-      ref={profileMenuRef}
-      onMouseLeave={() => setShowProfileMore(false)}
-      show-more={showProfileMore ? 'true' : 'false'}
-      className="profile-more"
-    >
+    <div ref={ref} show-more={showProfileMore ? 'true' : 'false'} className="profile-more">
       <div className="profile-name">
         <p>Adedeji Bergson</p>
       </div>
@@ -66,14 +57,12 @@ const Dashboard = () => {
   };
 
   const handleFilter = () => {
-    setShowFilter(prev => !prev)
-}
-
-
+    setShowFilter(prev => !prev);
+  };
 
   return (
     <main className='dashboard-cont'>
-      {width! <= 530 && showFilter ? <Filter handleFilter={handleFilter}/> : <><header>
+      <header>
         <div className="logo">
           <Logo />
           <button
@@ -120,12 +109,16 @@ const Dashboard = () => {
           <BsThreeDotsVertical />
         </button>
 
-        {ProfileMenu(showProfileMore, setShowProfileMore)}
-
-      </header><div className="dashboard-bdy">
-          <Sidebar showMobileNav={showMobileNav} />
+        <ProfileMenu showProfileMore={showProfileMore} setShowProfileMore={setShowProfileMore} />
+      </header>
+      <div className="dashboard-bdy">
+        <Sidebar showMobileNav={showMobileNav} />
+        {width! <= 530 && showFilter ? (
+          <Filter handleFilter={handleFilter} />
+        ) : (
           <Users showFilter={showFilter} handleFilter={handleFilter} />
-        </div></>}
+        )}
+      </div>
     </main>
   );
 };
