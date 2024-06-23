@@ -1,374 +1,469 @@
-.user-details-cont {
-    height: fit-content;
-    width: 100%;
+.user-details-container {
+    width: 100vw;
+    background: var(--background);
+    display: grid;
+    overflow: hidden;
+    position: relative;
 
-
-    .back-btn {
+    .user-details-body {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        border: none;
-        background-color: transparent;
-        font-size: 1rem;
-        color: var(--bluish-gray);
-        padding: 0;
-        cursor: pointer;
-        gap: 15px;
-        transition: all .3s ease;
+        height: calc(100vh - 100px);
+        z-index: 1;
 
-        &:hover {
-            transform: translateX(-5%);
-        }
-    }
+        .user-details-content {
+            padding: 50px 60px;
+            padding-bottom: 150px !important;
+            width: calc(100vw - 295px);
+            height: 100vh;
+            box-sizing: border-box;
+            overflow: auto;
+            z-index: 1;
 
-    .blacklist-activate {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-        width: fit-content;
-
-        button {
-            width: 170px;
-            height: 40px;
-            border-radius: 8px;
-            padding: 10px;
-            font-size: .875rem;
-            font-weight: 600;
-        }
-
-        .red {
-            color: var(--red);
-            border: solid 1px var(--red);
-        }
-
-        .teal {
-            color: var(--light-teal);
-            border: solid 1px var(--light-teal);
-        }
-    }
-
-
-
-    .hdn {
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        h1 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--primary-color);
-            margin-top: 30px;
-            margin-bottom: 40px;
-        }
-
-    }
-
-    .profile-sum {
-        background-color: white;
-        width: 100%;
-        box-sizing: border-box;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
-        .in {
-            display: none;
-        }
-
-        .top {
-            width: 100%;
-            display: flex;
-            padding: 25px;
-
-
-
-            .name-p {
+            .back-btn {
                 display: flex;
-                padding-right: 30px;
-                color: var(--primary-color);
-                border-right: 1px solid var(--profile-border);
+                justify-content: center;
+                align-items: center;
+                border: none;
+                background-color: transparent;
+                font-size: 1rem;
+                color: var(--bluish-gray);
+                padding: 0;
+                cursor: pointer;
+                gap: 15px;
+                transition: all .3s ease;
 
-                p:first-child {
-                    font-size: 1.38rem;
-                    font-weight: 500;
-                    margin-bottom: 0px;
-                }
-
-                p:nth-child(2) {
-                    font-size: .86rem;
-                    font-weight: 400;
-                    margin-top: 0px;
-                    color: var(--bluish-gray);
-                }
-
-                .pic-d {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100px;
-                    height: 100px;
-                    border-radius: 100vw;
-                    background-color: var(--transparent-color);
-                    margin-right: 20px;
+                &:hover {
+                    transform: translateX(-5%);
                 }
             }
 
-            .bank-tier {
-
-                display: flex;
-
-                .tier {
-                    padding: 0 30px;
-                    border-right: 1px solid var(--profile-border);
-
-                    p {
-                        font-weight: 500;
-                        font-size: .875rem;
-                        color: var(--bluish-gray);
-                        margin-bottom: 5px;
-                        margin-top: 28px;
-                    }
-
-                }
-
-                .bank-details {
-                    padding: 0 30px;
-                    color: var(--primary-color);
-
-                    p:first-child {
-                        font-size: 1.375rem;
-                        font-weight: 500;
-                        margin-bottom: 0px;
-                        margin-top: 23px;
-                    }
-
-                    p:nth-child(2) {
-                        font-size: .75rem;
-                        font-weight: 400;
-                        margin-top: 0;
-                    }
-                }
-            }
-
-
-        }
-
-        nav {
-            ul {
+            .blacklist-activate {
                 display: flex;
                 justify-content: space-between;
-                list-style-type: none;
-                margin-bottom: 0;
-                padding-left: 20px;
-                padding-right: 20px;
+                align-items: center;
+                gap: 15px;
+                width: fit-content;
 
-                li {
-                    padding: 0 20px;
-
-                    &:hover,
-                    &:focus {
-                        border-bottom: solid 2px var(--light-teal);
-                        color: var(--light-teal);
-                    }
+                button {
+                    width: 170px;
+                    height: 40px;
+                    border-radius: 8px;
+                    padding: 10px;
+                    font-size: .875rem;
+                    font-weight: 600;
                 }
 
-                .active {
-                    border-bottom: solid 2px var(--light-teal);
+                .red {
+                    color: var(--red);
+                    border: solid 1px var(--red);
+                }
+
+                .teal {
                     color: var(--light-teal);
+                    border: solid 1px var(--light-teal);
                 }
             }
 
-        }
-    }
 
-    .other-details {
-        background-color: white;
-        box-sizing: border-box;
-        padding: 30px 20px;
-        margin-top: 30px;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-        .general-details {
-            .infos {
-                .hdn {
-                    font-size: 1rem;
+            .hdn {
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                h1 {
+                    margin: 0;
+                    font-size: 1.5rem;
                     font-weight: 500;
                     color: var(--primary-color);
+                    margin-top: 30px;
+                    margin-bottom: 40px;
                 }
 
-                .p-infos {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            }
+
+            .profile-sum {
+                background-color: white;
+                width: 100%;
+                box-sizing: border-box;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+                .in {
+                    display: none;
                 }
 
-                .ee-infos {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                }
+                .top {
+                    width: 100%;
+                    display: flex;
+                    padding: 25px;
 
-                .s-infos {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
-                }
 
-                .g-infos {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                    border-bottom: none !important;
-                }
 
-                .details {
-                    border-bottom: 1px solid var(--profile-border);
-                    padding-bottom: 10px;
-                    margin-bottom: 20px;
+                    .name-p {
+                        display: flex;
+                        padding-right: 30px;
+                        color: var(--primary-color);
+                        border-right: 1px solid var(--profile-border);
 
-                    .info {
                         p:first-child {
-                            font-size: .75rem;
-                            font-weight: 400;
-                            color: var(--bluish-gray);
-                            margin-bottom: 0;
+                            font-size: 1.38rem;
+                            font-weight: 500;
+                            margin-bottom: 0px;
                         }
 
                         p:nth-child(2) {
+                            font-size: .86rem;
+                            font-weight: 400;
+                            margin-top: 0px;
+                            color: var(--bluish-gray);
+                        }
+
+                        .pic-d {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100px;
+                            height: 100px;
+                            border-radius: 100vw;
+                            background-color: var(--transparent-color);
+                            margin-right: 20px;
+                        }
+                    }
+
+                    .bank-tier {
+
+                        display: flex;
+
+                        .tier {
+                            padding: 0 30px;
+                            border-right: 1px solid var(--profile-border);
+
+                            p {
+                                font-weight: 500;
+                                font-size: .875rem;
+                                color: var(--bluish-gray);
+                                margin-bottom: 5px;
+                                margin-top: 28px;
+                            }
+
+                            p:nth-child(2){
+                                margin-top: 0;
+                            }
+
+                        }
+
+                        .bank-details {
+                            padding: 0 30px;
+                            color: var(--primary-color);
+
+                            p:first-child {
+                                font-size: 1.375rem;
+                                font-weight: 500;
+                                margin-bottom: 0px;
+                                margin-top: 23px;
+                            }
+
+                            p:nth-child(2) {
+                                font-size: .75rem;
+                                font-weight: 400;
+                                margin-top: 0;
+                            }
+                        }
+                    }
+
+
+                }
+
+                nav {
+                    ul {
+                        display: flex;
+                        justify-content: space-between;
+                        list-style-type: none;
+                        margin-bottom: 0;
+                        padding-left: 20px;
+                        padding-right: 20px;
+
+                        li {
+                            padding: 0 20px;
+
+                            &:hover,
+                            &:focus {
+                                border-bottom: solid 2px var(--light-teal);
+                                color: var(--light-teal);
+                            }
+                        }
+
+                        .active {
+                            border-bottom: solid 2px var(--light-teal);
+                            color: var(--light-teal);
+                        }
+                    }
+
+                }
+            }
+
+            .other-details {
+                background-color: white;
+                box-sizing: border-box;
+                padding: 30px 20px;
+                margin-top: 30px;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+                .general-details {
+                    .infos {
+                        .hdn {
                             font-size: 1rem;
                             font-weight: 500;
                             color: var(--primary-color);
-                            margin-top: 3px;
+                        }
+
+                        .p-infos {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+                        }
+
+                        .ee-infos {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                        }
+
+                        .s-infos {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+                        }
+
+                        .g-infos {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                            border-bottom: none !important;
+                        }
+
+                        .details {
+                            border-bottom: 1px solid var(--profile-border);
+                            padding-bottom: 10px;
+                            margin-bottom: 20px;
+
+                            .info {
+                                p:first-child {
+                                    font-size: .75rem;
+                                    font-weight: 400;
+                                    color: var(--bluish-gray);
+                                    margin-bottom: 0;
+                                }
+
+                                p:nth-child(2) {
+                                    font-size: 1rem;
+                                    font-weight: 500;
+                                    color: var(--primary-color);
+                                    margin-top: 3px;
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+
     }
+
+
+
+
+}
+
+@media screen and (min-width: 2300px) {
+    .user-details-container {
+        width: 2300px;
+        .user-details-body{
+            width: 23000px;
+        .user-details-content {
+            width: calc(2300px - 295px);
+        }
+    }}
 
 }
 
 @media screen and (max-width: 1241px) {
+    .user-details-container {
+        .user-details-body {
+            .user-details-content {
+                .profile-sum {
+                    nav {
+                        overflow-x: auto;
+                        overflow-y: hidden;
+                        scroll-snap-type: x mandatory;
+                        scroll-behavior: smooth;
+                        margin-top: 40px;
+                        white-space: nowrap;
+                        -ms-overflow-style: none;
+                        scrollbar-width: none;
 
-    .profile-sum {
-        nav {
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            margin-top: 40px;
-            white-space: nowrap;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            &::-webkit-scrollbar {
-                display: none;
-            }
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
 
-            ul {
-                min-width: 785px;
+                        ul {
+                            min-width: 785px;
+                        }
+                    }
+                }
+
             }
         }
     }
 }
 
 @media screen and (max-width: 1124px) {
-    .profile-sum {
-        .top {
-            display: grid !important;
-            box-sizing: border-box;
+    .user-details-container {
+        .user-details-body {
+            .user-details-content {
+                .profile-sum {
+                    .top {
+                        display: grid !important;
+                        box-sizing: border-box;
 
-            .name-p {
-                border: none !important;
+                        .name-p {
+                            border: none !important;
+                        }
+
+                        .bank-tier {
+                            margin-left: 90px;
+                            width: 360px;
+                            height: 70px;
+                        }
+
+                    }
+
+                    nav {
+                        margin-top: 0px;
+                    }
+                }
+
             }
-
-            .bank-tier {
-                margin-left: 90px;
-                width: 360px;
-                height: 70px;
-            }
-
-        }
-
-        nav {
-            margin-top: 0px;
         }
     }
 }
 
 @media screen and (max-width: 1000px) {
-    .blacklist-activate {
-        flex-direction: column;
-        margin-bottom: 10px;
+    .user-details-container {
+        .user-details-body {
+            .user-details-content {
+
+                .blacklist-activate {
+                    flex-direction: column;
+                    margin-bottom: 10px;
+                }
+            }
+        }
     }
 }
 
 
 @media screen and (max-width: 888px) {
-    .profile-sum {
-        height: 342px;
+    .user-details-container {
+        .user-details-body {
+            .user-details-content {
+                .profile-sum {
+                    height: 342px;
 
-        .top {
-            height: 300px;
+                    .top {
+                        height: 300px;
 
-            .name-p {
-                height: fit-content;
-            }
+                        .name-p {
+                            height: fit-content;
+                        }
 
-            .bank-tier {
-                display: flex;
-                flex-direction: column;
-                height: fit-content;
-                margin-top: -40px;
+                        .bank-tier {
+                            display: flex;
+                            flex-direction: column;
+                            height: fit-content;
+                            margin-top: -40px;
 
-                .tier {
-                    border: none !important;
+                            .tier {
+                                border: none !important;
 
-                    p {
-                        margin: 0 !important;
+                                p {
+                                    margin: 0 !important;
+                                }
+                            }
+
+                            .bank-details {
+                                p {
+                                    margin-top: 10px !important;
+                                }
+                            }
+                        }
+
                     }
+
                 }
 
-                .bank-details {
-                    p {
-                        margin-top: 10px !important;
-                    }
-                }
             }
-
         }
-
     }
 }
 
+@media screen and (max-width: 860px) {
+    .user-details-container {
+        .user-details-body {
+            .user-details-content {
+                width: calc(100vw) !important;
+            }
+        }
+    }
+
+}
+
+
 @media screen and (max-width: 646px) {
-    .user-details-cont {
-        .blacklist-activate {
-            display: none;
+    .user-details-container {
+        .user-details-body {
+
+            .user-details-content {
+                width: calc(100vw) !important;
+
+                .blacklist-activate {
+                    display: none;
+                }
+
+                .top {
+                    position: relative;
+                }
+
+                .in {
+                    position: absolute;
+                    display: flex !important;
+                    padding: 5px;
+                    top: 0;
+                    right: 0;
+                    margin: 10px;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 15px;
+                    width: fit-content;
+
+                    button {
+                        width: fit-content;
+                        height: fit-content;
+                        border: none !important;
+                        padding: 0px;
+                        font-size: .8rem;
+                        font-weight: 500;
+                        background-color: transparent;
+                    }
+                }
+            }
         }
+    }
+}
 
-        .top {
-            position: relative;
-        }
-
-        .in {
-            position: absolute;
-            display: flex !important;
-            padding: 5px;
-            top: 0;
-            right: 0;
-            margin: 10px;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            width: fit-content;
-
-            button {
-                width: fit-content;
-                height: fit-content;
-                border: none !important;
-                padding: 0px;
-                font-size: .8rem;
-                font-weight: 500;
-                background-color: transparent;
+@media screen and (max-width: 531px) {
+    .user-details-container {
+        .user-details-body {
+            .user-details-content {
+                padding: 50px 20px;
             }
         }
     }
@@ -376,25 +471,44 @@
 
 
 @media screen and (max-width: 421px) {
-    .name-p {
-        display: flex;
-        flex-direction: column;
-    }
+    .user-details-container {
+        .user-details-body {
+            .user-details-content {
+                .name-p {
+                    display: flex;
+                    flex-direction: column;
+                }
 
-    .pic-d {
-        width: 70px !important;
-        height: 70px !important;
-    }
+                .pic-d {
+                    width: 70px !important;
+                    height: 70px !important;
+                }
 
-    .bank-tier {
-        margin-left: 0px !important;
-        margin-top: 0px !important;
+                .bank-tier {
+                    margin-left: 0px !important;
+                    margin-top: 0px !important;
 
-        .bank-details,
-        .tier {
-            padding: 0 !important;
+                    .bank-details,
+                    .tier {
+                        padding: 0 !important;
+                    }
+                }
+            }
         }
     }
 
+}
 
+@media screen and (max-width: 387px) {
+    .user-details-container {
+        .user-details-body {
+            .user-details-content {
+                .in {
+                  
+                    display: grid !important;
+                   
+                }
+            }
+        }
+    }
 }

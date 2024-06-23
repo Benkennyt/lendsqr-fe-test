@@ -1,22 +1,21 @@
 import './UserDetails.scss';
 import ProfileP from '../../../assets/svg/profile-p.svg';
 import StarF from '../../../assets/svg/star-f.svg';
+import StarH from '../../../assets/svg/star-h.svg';
 import BackIcon from '../../../assets/svg/back.svg';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Sidebar from '../../sidebar/Sidebar';
+import Header from '../../../app/general/Header';
+import { useNavigate } from 'react-router-dom';
 
-interface UserDetailsProps {
-    userId: string;
-    setShowUserDetails: (index: boolean) => void;
-    setUserId: (index: string) => void;
-}
 
-const UserDetails = (props: UserDetailsProps) => {
-    const { userId, setShowUserDetails, setUserId } = props;
+const UserDetails = () => {
     const [pageNum, setPageNum] = useState<number>(0)
     const [userData, setUserData] = useState<null | User>(null)
     const { data } = useSelector((state: any) => state.users);
-    let user = data.find((user: User) => user.id === userId)
+    let user = data.find((user: User) => user.id ===  localStorage.getItem('userId'))
+    const navigate= useNavigate()
 
     useEffect(() => {
         if (user && user.id != '') {
@@ -25,6 +24,8 @@ const UserDetails = (props: UserDetailsProps) => {
         } else {
             setUserData(getObject('userData'))
         }
+
+        
     }, [])
 
     const formatNumber = (num: any) => {
@@ -46,9 +47,8 @@ const UserDetails = (props: UserDetailsProps) => {
     };
 
     const handleBackButton = () => {
-        setUserId('')
         localStorage.clear()
-        setShowUserDetails(false)
+        navigate('/dashboard')
     }
 
     const renderGeneralDetails = () => (
@@ -188,66 +188,85 @@ const UserDetails = (props: UserDetailsProps) => {
         </div>
     )
 
+    const handleTiers =(tier: number | undefined) => {
+        if(tier === 3) {
+            return <p><StarF /> <StarF /> <StarF /></p>
+        }else if(tier === 2) {
+            return <p><StarF /> <StarF /> <StarH /></p>
+        }else if(tier === 1) {
+            return <p><StarF /> <StarH /> <StarH /></p>
+        }
+        else if(tier === 0) {
+            return <p><StarH /> <StarH /> <StarH /></p>
+        }
+    }
+
     return (
-        <div className='user-details-cont'>
-            <button className='back-btn' onClick={handleBackButton}><BackIcon /> Back to Users</button>
-            <div className="hdn">
-                <h1>User Details</h1>
-                <div className="blacklist-activate">
-                    <button className='red'>BLACKLIST USER</button>
-                    <button className='teal'>ACTIVATE USER</button>
+        <div className='user-details-container'>
+            <Header/>
+            <div className="user-details-body">
+                <Sidebar/>
+                <div className="user-details-content">
+                    <button className='back-btn' onClick={handleBackButton}><BackIcon /> Back to Users</button>
+                    <div className="hdn">
+                        <h1>User Details</h1>
+                        <div className="blacklist-activate">
+                            <button className='red'>BLACKLIST USER</button>
+                            <button className='teal'>ACTIVATE USER</button>
+                        </div>
+                    </div>
+                    <div className="profile-sum">
+                        <div className="top">
+                            <div className="name-p">
+                                <div className="pic-d">
+                                    <ProfileP />
+                                </div>
+                                <div className="name-id">
+                                    <p>{userData?.fullName}</p>
+                                    <p>{userData?.id}</p>
+                                </div>
+                            </div>
+
+                            <div className="bank-tier">
+                                <div className="tier">
+                                    <p>User's Tier</p>
+                                    {handleTiers(userData?.userTier)}
+                                </div>
+                                <div className="bank-details">
+                                    <p>₦{formatNumber(userData?.balance)}</p>
+                                    <p>{userData?.accountNumber}/{userData?.bankName}</p>
+                                </div>
+                            </div>
+                            <div className="blacklist-activate in">
+                                <button className='red'>BLACKLIST USER</button>
+                                <button className='teal'>ACTIVATE USER</button>
+                            </div>
+                        </div>
+
+
+                        <nav>
+                            <ul>
+                                <li className={pageNum === 0 ? 'active' : ''} onClick={() => setPageNum(0)}>General Details</li>
+
+                                <li className={pageNum === 1 ? 'active' : ''} onClick={() => setPageNum(1)}>Documents</li>
+
+                                <li className={pageNum === 2 ? 'active' : ''} onClick={() => setPageNum(2)}>Bank Details</li>
+
+                                <li className={pageNum === 3 ? 'active' : ''} onClick={() => setPageNum(3)}>Loans</li>
+
+                                <li className={pageNum === 4 ? 'active' : ''} onClick={() => setPageNum(4)}>Savings</li>
+
+                                <li className={pageNum === 5 ? 'active' : ''} onClick={() => setPageNum(5)}>App and System</li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div className="other-details">
+                        {pageNum === 0 ?
+                            renderGeneralDetails() : <p>Current Not Available</p>
+                        }
+                    </div>
                 </div>
-            </div>
-            <div className="profile-sum">
-                <div className="top">
-                    <div className="name-p">
-                        <div className="pic-d">
-                            <ProfileP />
-                        </div>
-                        <div className="name-id">
-                            <p>{userData?.fullName}</p>
-                            <p>{userData?.id}</p>
-                        </div>
-                    </div>
-
-                    <div className="bank-tier">
-                        <div className="tier">
-                            <p>User's Tier</p>
-                            <StarF />
-                        </div>
-                        <div className="bank-details">
-                            <p>₦{formatNumber(userData?.balance)}</p>
-                            <p>{userData?.accountNumber}/{userData?.bankName}</p>
-                        </div>
-                    </div>
-                    <div className="blacklist-activate in">
-                        <button className='red'>BLACKLIST USER</button>
-                        <button className='teal'>ACTIVATE USER</button>
-                    </div>
-                </div>
-
-
-                <nav>
-                    <ul>
-                        <li className={pageNum === 0 ? 'active' : ''} onClick={() => setPageNum(0)}>General Details</li>
-
-                        <li className={pageNum === 1 ? 'active' : ''} onClick={() => setPageNum(1)}>Documents</li>
-
-                        <li className={pageNum === 2 ? 'active' : ''} onClick={() => setPageNum(2)}>Bank Details</li>
-
-                        <li className={pageNum === 3 ? 'active' : ''} onClick={() => setPageNum(3)}>Loans</li>
-
-                        <li className={pageNum === 4 ? 'active' : ''} onClick={() => setPageNum(4)}>Savings</li>
-
-                        <li className={pageNum === 5 ? 'active' : ''} onClick={() => setPageNum(5)}>App and System</li>
-                    </ul>
-                </nav>
-            </div>
-
-            <div className="other-details">
-                {pageNum === 0 ?
-                    renderGeneralDetails() : <p>Current Not Available</p>
-                }
             </div>
         </div>
     )

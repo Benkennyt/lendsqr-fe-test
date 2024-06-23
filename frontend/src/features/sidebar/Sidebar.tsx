@@ -27,7 +27,7 @@ import LogoutIcon from '../../assets/svg/logout.svg';
 
 
 interface SidebarProps {
-    showMobileNav: boolean
+    showMobileNav?: boolean
 }
 const Sidebar = (props: SidebarProps) => {
     const {showMobileNav} = props;

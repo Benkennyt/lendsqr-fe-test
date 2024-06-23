@@ -45,5 +45,6 @@ interface User {
     isLoading: boolean;
     data: User[];
     isError: boolean;
+    errorMessage: string | null,
   }
   

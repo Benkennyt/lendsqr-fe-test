@@ -3,9 +3,11 @@ import LeftSvg from '../../assets/svg/pablo-sign-in 1.svg';
 
 import Logo from '../../assets/svg/logo.svg'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
     setPasswordVisible((prev) => !prev)
@@ -37,7 +39,7 @@ const LoginPage = () => {
               <div onClick={togglePasswordVisibility} className="password-hide-show">{passwordVisible ? 'HIDE' : "SHOW"}</div>
             </div>
             <a href="">FORGOT PASSWORD?</a>
-            <button>LOG IN</button>
+            <button onClick={() => navigate('/dashboard')}>LOG IN</button>
           </form>
         </div>
       </div>
